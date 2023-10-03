@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồ án website bán hoa quả</title>
+    <link rel="stylesheet" href="/public/css/index.css">
+    <link rel="stylesheet" href="/public/font/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="header">
+            <div class="menu-header container">
+                <div class="lh">
+                    <ul>
+                        <li>Thực phẩm sạch</li>
+                        <li>Halora Fruits</li>
+                    </ul>
+                </div>
+                <div class="rh">
+                    <ul>
+                        <li><a href="profile.html">Tài khoản</a></li>
+                        <li>Thanh toán</li>
+                        <li>Cửa hàng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu container">
+            <div class="logo">
+                <img src="/public/img/logo.png" alt="" srcset="">
+            </div>
+
+            <div class="search">
+                <div class="frm-search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="list">
+                <div class="list-menu">
+                    <ul>
+                        <li>Cửa hàng</li>
+                        <li>Giỏ hàng</li>
+                        <li>Giới thiệu</li>
+                        <li>Liên hệ</li>
+                        <li id="accounts"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slider" style="margin-bottom: 30px;">
+            <div class="btn-left" id="btn-left">
+                <button><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>
+            </div>
+            <div class="load-image">
+                <img id="img-slider" data-number="0" src="/public/img/slider1.jpg" alt="" srcset="">
+            </div>
+            <div class="btn-right" id="btn-right">
+                <button><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
+            </div>
+        </div>
+
+        <div class="sub-slider container" style="margin-bottom: 30px;">
+            <div class="img-sub-slider">
+                <img src="/public/img/banner-dau-ca-omega-3-1-1.webp" alt="" srcset="">
+            </div>
+            <div class="img-sub-slider">
+                <img src="/public/img/banner-dau-ca-omega-3-1-1.webp" alt="" srcset="">
+            </div>
+            <div class="img-sub-slider">
+                <img src="/public/img/banner-dau-ca-omega-3-1-1.webp" alt="" srcset="">
+            </div>
+        </div>
+
+        <div class="categorys container">
+            <div class="categorys-products">
+                <div class="title-categorys">
+                    <h3>
+                        TRÁI CÂY NHẬP KHẨU
+                    </h3>
+                    <p class="sub-title-categorys">
+                        Là nhà cung cấp thực phẩm tươi sạch hàng đầu khu vực phía nam
+                    </p>
+                </div>
+
+                <div class="list-products" id="list-products">
+                  
+                </div>
+            </div>
+        </div>
+
+        <div class="blog container">
+            <div class="post">
+                <h3>CÓ THỂ BẠN CẦN</h3>
+
+                <div class="item-post">
+                    <div class="img-post">
+                        <img src="/public/img/slider1.jpg" alt="">
+                    </div>
+                    <div class="content-post">
+                        <div class="title-post">
+                            <h4>Kỹ thuật trồng rau sạch trong chậu xốp tại nhà đơn giản</h4>
+                        </div>
+                        <div class="date-post">
+                            <p>24/5/2023</p>
+                        </div>
+
+                        <div class="text-post">
+                            <p>Tự trồng rau trong thùng xốp tại nhà là sự lựa chọn của rất nhiều gia đình trong thành phố bởi phương pháp trồng rau đơn giản, dễ trồng, dễ quản lý, an toàn và tiện lợi. Nhưng người trồng cũng cần ...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-post">
+                    <div class="img-post">
+                        <img src="/public/img/slider1.jpg" alt="">
+                    </div>
+                    <div class="content-post">
+                        <div class="title-post">
+                            <h4>Kỹ thuật trồng rau sạch trong chậu xốp tại nhà đơn giản</h4>
+                        </div>
+                        <div class="date-post">
+                            <p>24/5/2023</p>
+                        </div>
+
+                        <div class="text-post">
+                            <p>Tự trồng rau trong thùng xốp tại nhà là sự lựa chọn của rất nhiều gia đình trong thành phố bởi phương pháp trồng rau đơn giản, dễ trồng, dễ quản lý, an toàn và tiện lợi. Nhưng người trồng cũng cần ...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-post">
+                    <div class="img-post">
+                        <img src="/public/img/slider1.jpg" alt="">
+                    </div>
+                    <div class="content-post">
+                        <div class="title-post">
+                            <h4>Kỹ thuật trồng rau sạch trong chậu xốp tại nhà đơn giản</h4>
+                        </div>
+                        <div class="date-post">
+                            <p>24/5/2023</p>
+                        </div>
+
+                        <div class="text-post">
+                            <p>Tự trồng rau trong thùng xốp tại nhà là sự lựa chọn của rất nhiều gia đình trong thành phố bởi phương pháp trồng rau đơn giản, dễ trồng, dễ quản lý, an toàn và tiện lợi. Nhưng người trồng cũng cần ...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-post">
+                    <div class="img-post">
+                        <img src="/public/img/slider1.jpg" alt="">
+                    </div>
+                    <div class="content-post">
+                        <div class="title-post">
+                            <h4>Kỹ thuật trồng rau sạch trong chậu xốp tại nhà đơn giản</h4>
+                        </div>
+                        <div class="date-post">
+                            <p>24/5/2023</p>
+                        </div>
+
+                        <div class="text-post">
+                            <p>Tự trồng rau trong thùng xốp tại nhà là sự lựa chọn của rất nhiều gia đình trong thành phố bởi phương pháp trồng rau đơn giản, dễ trồng, dễ quản lý, an toàn và tiện lợi. Nhưng người trồng cũng cần ...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact">
+                <div class="form-contact">
+                    <h3>Liên hệ tư vấn mua hàng</h3>
+
+                    <div class="input">
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="input">
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="input">
+                        <input type="text" name="" id="">
+                    </div>
+                    <div class="input">
+                        <button>Gửi liên hệ</button>
+                    </div>
+                </div>    
+                
+                <div class="social">
+                    <iframe width="853" height="480" src="" title="Imovie sample video fruits film clip ( HD)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="menu-footer container">
+                <div class="item-menu-footer">
+                    <img src="/public/img/logo.png" alt="">
+                    <p><span style="font-size: 85%;color: #fff;">Chuyên cung cấp các loại hoa quả nhập khẩu, nội địa và các loại thực phẩm từ thiên nhiên.</span></p>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupOrder" style="display: none;">
+        <div id="formOrder">
+            <div id="closePopup">
+                <button>X</button>
+            </div>
+            <div class="input">
+                Tên sản phẩm:<label for="" id="nameProduct"></label>
+            </div>
+            <div class="input">
+                Giá sản phẩm:<label for="" id="priceProduct"></label> VND
+            </div>
+            <div class="input">
+                Số lượng trong kho:<label for="" id="quantityProduct"></label>
+            </div>
+            <div class="input">
+                <input id="inputQuantity" type="number" placeholder="Số lượng" value="1">
+            </div>
+            <div class="input">
+                <button id="buttonOrder">Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/js/jquery.js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/js/ENV.js"></script>
+    <script src="/public/js/function.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!-- Script Popup -->
+    <script>
+        $("#closePopup").on("click",(e) => {
+            $("#popupOrder").attr('style','display: none;')
+        })
+        const OpenPopup = (id,name,price,quantity) => {
+            $("#popupOrder").attr('style','display: flex;');
+            $("#nameProduct").text(name);
+            $("#priceProduct").text(price);
+            $("#quantityProduct").text(quantity);
+
+            $('#buttonOrder').attr('onclick',`CreateOrder(${id},'${name}',${price},${quantity})`);
+        }
+        const CreateOrder = (id,name,price,quantity) => {
+
+            if(quantity <= 0){
+                Toastify({
+                text: `Số lượng ${name} trong kho đã hết`,
+                duration: 3000
+                }).showToast();
+                return;
+            }
+            else{
+                quantity = $("#inputQuantity").val();
+            }
+
+            var lstProducts = JSON.parse(localStorage.getItem(varListProducts)) || [];
+            
+            var product = {
+                id: id,
+                name: name,
+                price: price,
+                quantity: parseFloat(quantity),
+                total_price: price * parseInt(quantity)
+            }
+
+            lstProducts.push(product);
+
+            localStorage.setItem(varListProducts,JSON.stringify(lstProducts));
+
+            Toastify({
+                text: `Thêm ${name} vào giỏ hàng thành công !`,
+                duration: 3000
+            }).showToast();
+            $("#popupOrder").attr('style','display: none;');
+        }
+    </script>
+    <script>
+        $(document).ready(() => {
+            $.ajax(baseUrl + "Products/getlist",{
+                method: "GET",
+                timeout: 0,
+                success: (res) => {
+                    var listProducts = document.getElementById("list-products");
+                    res.forEach((product) => {
+                        addProduct(listProducts, product);
+                    });
+                }
+            });
+
+            $.ajax(baseUrl + "Orders/getlist",{
+                method: "POST",
+                timeout: 0,
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT)
+                },
+                success: (res) =>
+                {
+                    $("#accounts").text("Tài khoản: " + localStorage.getItem(varUsername));
+                },
+                error: (res) => {
+                    console.log(res);
+                }
+            })
+        });
+    </script>
+</body>
+</html>

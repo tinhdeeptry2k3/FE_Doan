@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồ án website bán hoa quả</title>
+    <link rel="stylesheet" href="/public/css/order.css">
+    <link rel="stylesheet" href="/public/font/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="header">
+            <div class="menu-header container">
+                <div class="lh">
+                    <ul>
+                        <li>Thực phẩm sạch</li>
+                        <li>Halora Fruits</li>
+                    </ul>
+                </div>
+                <div class="rh">
+                    <ul>
+                        <li>Cửa hàng</li>
+                        <li>Sản phẩm</li>
+                        <li>Thanh Toán</li>
+                        <li>Tài khoản</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu container">
+            <div class="logo">
+                <img src="/public/img/logo.png" alt="" srcset="">
+            </div>
+
+            <div class="search">
+                <div class="frm-search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="list">
+                <div class="list-menu">
+                    <ul>
+                        <li>Cửa hàng</li>
+                        <li>Sản phẩm</li>
+                        <li>Thanh toán</li>
+                        <li>Cửa hàng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart container" style="margin-top: 30px;margin-bottom: 30px;">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>ID</td>
+                        <td>ĐỊA CHỈ</td>
+                        <td>SỐ ĐIỆN THOẠI</td>
+                        <td>TRẠNG THÁI</td>
+                        <td>ACTION</td>
+                    </tr>
+                </thead>
+                <tbody id="rowData">
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="footer">
+            <div class="menu-footer container">
+                <div class="item-menu-footer">
+                    <img src="/public/img/logo.png" alt="">
+                    <p><span style="font-size: 85%;color: #fff;">Chuyên cung cấp các loại hoa quả nhập khẩu, nội địa và các loại thực phẩm từ thiên nhiên.</span></p>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup" style="display: none;">
+            <div id="details">
+                <div class="title">
+                    <div class="title-details">
+                        <span>Chi tiết đơn hàng</span>
+                    </div>
+                    <div id="closePopup">
+                        <button>X</button>
+                    </div>
+                </div>
+
+                <div class="info-details">
+                    <div style="margin: 30px 0px;">
+                        <span>Trạng thái: </span><span id="status"></span>
+                    </div>
+                    <div style="margin: 30px 0px;">
+                        <span>Địa chỉ: </span><span id="address"></span>
+                    </div>
+                    <div style="margin: 30px 0px;">
+                        <span>Số điện thoại: </span><span id="phone"></span>
+                    </div>
+
+                    <div style="margin: 30px 0px;">
+                        <span>Sản phẩm</span>
+                        <table id="tableDetails" style="margin-top: 30px;">
+                            <thead>
+                                <tr>
+                                    <td>Tên</td>
+                                    <td>Số lượng</td>
+                                    <td>Tổng tiền</td>
+                                </tr>
+                            </thead>
+                            <tbody id="rowDataDetails">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/js/ENV.js"></script>
+    <script src="/public/js/function.js"></script>
+
+    <script>
+        $(document).ready(() => {
+            $.ajax(baseUrl + "Orders/getlist",{
+                method: "POST",
+                timeout: 0,
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT)
+                },
+                success: (res) => {
+                    loadOrder(res.result);
+                    $(document).ready(function() {
+                        $('#table').DataTable();
+                    });
+                },
+                error: (res) => {
+                    location.href = "login.html";
+                }
+            })
+        })
+        $("#closePopup").on('click',() => {
+            $("#popup").attr("style","display: none;");
+        })
+
+        const OrderDetails = (order_id,status,address,phone) => {
+            $("#popup").attr("style","display: flex;");
+
+            $("#status").text(status);
+            $("#address").text(address);
+            $("#phone").text(phone);
+
+            $.ajax(baseUrl + "Orders/details/" + order_id,{
+                method: "GET",
+                timeout: 0,
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT)
+                },
+                success: (res) => {
+                    $("#rowDataDetails").empty();
+                    loadOrderDetails(res.result);
+                    $('#tableDetails').DataTable();
+                }
+            })
+        }
+    </script>
+</body>
+</html>

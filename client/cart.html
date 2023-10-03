@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồ án website bán hoa quả</title>
+    <link rel="stylesheet" href="/public/css/cart.css">
+    <link rel="stylesheet" href="/public/font/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="wrapper">
+
+        <div class="header">
+            <div class="menu-header container">
+                <div class="lh">
+                    <ul>
+                        <li>Thực phẩm sạch</li>
+                        <li>Halora Fruits</li>
+                    </ul>
+                </div>
+                <div class="rh">
+                    <ul>
+                        <li>Cửa hàng</li>
+                        <li>Sản phẩm</li>
+                        <li>Thanh Toán</li>
+                        <li>Tài khoản</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu container">
+            <div class="logo">
+                <img src="/public/img/logo.png" alt="" srcset="">
+            </div>
+
+            <div class="search">
+                <div class="frm-search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+            <div class="list">
+                <div class="list-menu">
+                    <ul>
+                        <li>Cửa hàng</li>
+                        <li>Sản phẩm</li>
+                        <li>Thanh toán</li>
+                        <li>Cửa hàng</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart container" style="margin-top: 30px;margin-bottom: 30px;">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>ID</td>
+                        <td>TÊN SẢN PHẨM</td>
+                        <td>GIÁ</td>
+                        <td>SỐ LƯỢNG</td>
+                        <td>TỔNG TIỀN</td>
+                        <td>ACTION</td>
+                    </tr>
+                </thead>
+                <tbody id="rowData">
+                </tbody>
+            </table>
+
+            <div class="infomation">
+                <div class="card-title">
+                    <p>Thông tin đặt hàng</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-form">
+                        <div class="input">
+                            <input type="text" placeholder="Địa chỉ" id="address">
+                        </div>
+                        <div class="input">
+                            <input type="text" placeholder="Số điện thoại" id="phone">
+                        </div>
+                    </div>
+
+                    <div class="card-info">
+                        <div class="input">
+                            Tổng tiền: <label id="total_price"></label> VND
+                        </div>
+                        <div class="input">
+                            Số tiền cần thanh toán: <label id="total_pay"></label> VND
+                        </div>
+                        <div class="input">
+                            <button onclick="CreateOrder()">ĐẶT HÀNG</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="menu-footer container">
+                <div class="item-menu-footer">
+                    <img src="/public/img/logo.png" alt="">
+                    <p><span style="font-size: 85%;color: #fff;">Chuyên cung cấp các loại hoa quả nhập khẩu, nội địa và các loại thực phẩm từ thiên nhiên.</span></p>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+                <div class="item-menu-footer">
+                    <h3>Liên hệ</h3>
+                    <ul>
+                        <li>200 Đường 3 tháng 2, Quận 10, Tp.Hồ Chí Minh</li>
+                        <li> 0906.399.613</li>
+                        <li> nguyenngocnhatthy@gmail.com</li>
+                        <li> fb.com/halonafruits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/public/js/index.js"></script>
+    <script src="/public/js/ENV.js"></script>
+    <script src="/public/js/function.js"></script>
+    <script>
+        
+        $(document).ready(() => {
+            $.ajax(baseUrl + "Users/checkaccount",{
+                method: "POST",
+                timeout: 0,
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT)
+                },
+                success: (res) => {
+                    loadCart();
+                    $(document).ready(function() {
+                        $('#table').DataTable();
+                    });
+                },
+                error: (res) => {
+                    setTimeout(() => {
+                        Toastify({
+                            text: "Bạn cần đăng nhập để xem giỏ hàng !",
+                            duration: 3000
+                        }).showToast();
+                        location.href = 'login.html';
+                    },1500);
+                }
+            })
+        });
+
+        const CreateOrder = () => {
+            var lstProducts = JSON.parse(localStorage.getItem(varListProducts)) || [];
+
+            if (lstProducts.length === 0) {
+                console.log("no_products");
+                Toastify({
+                    text: "Bạn không có sản phẩm trong giỏ hàng !",
+                    duration: 3000
+                }).showToast();
+                return;
+            }
+            else
+            {
+                var lstProductsNew = [];
+                lstProducts.forEach(product => {
+                    lstProductsNew.push({
+                        id: product.id,
+                        quantity: product.quantity
+                    });
+                });
+            }
+
+            $.ajax(baseUrl + "Orders/insert",{
+                method: "POST",
+                timeout: 0,
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT),
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                "orders": {
+                    "id": "",
+                    "username": localStorage.getItem(varUsername),
+                    "address": $("#address").val(),
+                    "phone": $("#phone").val(),
+                    "status": ""
+                },
+                "listProducts": lstProductsNew
+                }),
+                success: (res) => {
+                    if(res.message == "create_order_success")
+                    {
+                        Toastify({
+                        text: "Đặt hàng thành công !",
+                        duration: 3000
+                        }).showToast();
+                        localStorage.setItem(varListProducts,null);
+                        
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    }
+                },
+                error: (res) => {
+                    Toastify({
+                    text: "Có lỗi xảy ra !",
+                    duration: 3000
+                    }).showToast();
+                    setTimeout(() => {
+                        location.reload();
+                    },1000)
+                }
+            })
+        }
+
+        const DeleteOrder = (id) => {
+            $("#rowData").empty();
+            var lstProducts = JSON.parse(localStorage.getItem(varListProducts)) || [];
+            lstProducts.splice(id,1);
+            localStorage.setItem(varListProducts,JSON.stringify(lstProducts));
+            loadCart();
+        }
+    </script>
+    
+</body>
+</html>
