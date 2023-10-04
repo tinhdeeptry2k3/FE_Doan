@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANG QUẢN TRỊ</title>
+    <link rel="stylesheet" href="/public/css/accounts.css">
+    <link rel="stylesheet" href="/public/font/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="btn">
+                <p><a href="/accounts.html">TÀI KHOẢN</a></p>
+            </div>
+            <div class="btn">
+                <p><a href="/categorys.html">DANH MỤC</a></p>
+            </div>
+            <div class="btn">
+                <p><a href="/orders.html">ĐƠN HÀNG</a></p>
+            </div>
+            <div class="btn">
+                <p><a href="/products.html">SẢN PHẨM</a></p>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>TÀI KHOẢN</h3>
+            <div class="btnAdd">
+                <button onclick="openPopup()">THÊM TÀI KHOẢN</button>
+            </div>
+
+            <div class="cart" style="margin-top: 30px;margin-bottom: 30px;">
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <td>STT</td>
+                            <td>ID</td>
+                            <td>ĐỊA CHỈ</td>
+                            <td>SỐ ĐIỆN THOẠI</td>
+                            <td>TRẠNG THÁI</td>
+                            <td>ACTION</td>
+                        </tr>
+                    </thead>
+                    <tbody id="rowData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" style="display: none;">
+        <div id="form-popup">
+            <div id="title-popup">
+                <div class="title-popup">
+                    <span>THÊM TÀI KHOẢN</span>
+                </div>
+                <div class="exit-popup">
+                    <button onclick="closePopup()">X</button>
+                </div>
+            </div>
+            <div class="content-popup">
+                <div class="form" style="margin-top: 30px;">
+                    <input type="text" id="username" placeholder="Username">
+                </div>
+                <div class="form">
+                    <input type="text" id="password" placeholder="Password">
+                </div>
+                <div class="form">
+                    <select id="level">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <button>THÊM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        $(document).ready(() => {
+            $("#table").DataTable();
+        })
+
+        const openPopup = () => {
+            $("#popup").attr('style','display: flex');
+        }
+
+        const closePopup = () => {
+            $("#popup").attr('style','display: none');
+        }
+
+        const editPopup = () => {
+            $("#popup").attr('style','display: flex');
+        }
+
+        const deleteRow = (id) => {
+            
+        }
+    </script>
+</body>
+</html>
