@@ -1,11 +1,11 @@
 * {
+    padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 .wrapper {
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     position: fixed;
     width: 100%;
@@ -14,7 +14,6 @@
     left: 0;
     justify-content: center;
     align-items: center;
-    overflow: scroll;
 }
 
 .menu {
@@ -28,6 +27,8 @@
     height: 100%;
     background-color: #fff;
     padding: 30px;
+    overflow: scroll;
+
 }
 
 .btn {

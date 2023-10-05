@@ -28,9 +28,9 @@
         </div>
 
         <div class="panel">
-            <h3>SẢN PHẨM</h3>
+            <h3>ĐƠN HÀNG</h3>
             <div class="btnAdd">
-                <button onclick="openPopup()">THÊM SẢN PHẨM</button>
+                <button onclick="openPopup()">THÊM ĐƠN HÀNG</button>
             </div>
 
             <div class="cart" style="margin-top: 30px;margin-bottom: 30px;">
@@ -39,12 +39,10 @@
                         <tr>
                             <td>STT</td>
                             <td>ID</td>
-                            <td>NAME</td>
-                            <td>PRICE</td>
-                            <td>QUANTITY</td>
-                            <td>DESCRIPTION</td>
-                            <td>CATEGORYS_ID</td>
-                            <td>IMAGE</td>
+                            <td>USERNAME</td>
+                            <td>ADDRESS</td>
+                            <td>PHONE</td>
+                            <td>STATUS</td>
                             <td>ACTION</td>
                         </tr>
                     </thead>
@@ -154,26 +152,24 @@
                 }
             });
 
-            $.ajax(baseUrl + "Products/getlist",{
-                method: "GET",
+            $.ajax(baseUrl + "Orders/getlist",{
+                method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(varJWT)
                 },
                 success: (res) => {
                     var row = document.getElementById('rowData');
                     var count = 0;
-                    var result = res;
+                    var result = res.result;
                     result.forEach(element => {
                         row.innerHTML = row.innerHTML + '<tr>'+
                             '<td>'+ count +'</td>' +
                             '<td>'+ element.id +'</td>' +
-                            '<td>'+ element.name +'</td>' +
-                            '<td>'+ element.price +'</td>' +
-                            '<td>'+ element.quantity +'</td>' +
-                            '<td>'+ element.description +'</td>' +
-                            '<td>'+ element.category_id +'</td>' +
-                            '<td><img src="'+ element.image +'"></td>' +
-                            '<td><button onclick="editPopup(`editPopup`,`'+ element.id +'`)">Sửa</button><button onclick="deleteRow('+ element.id +')">Xóa</button></td>' +
+                            '<td>'+ element.username +'</td>' +
+                            '<td>'+ element.address +'</td>' +
+                            '<td>'+ element.phone +'</td>' +
+                            '<td>'+ element.status +'</td>' +
+                            '<td><button onclick="editPopup(`editPopup`,`'+ element.id +'`)">Sửa</button><button onclick="deleteRow(`'+ element.id +'`)">Xóa</button></td>' +
                         '</tr>';
                         count++;
                     });
@@ -290,13 +286,13 @@
         }
 
         const deleteRow = (id) => {
-            $.ajax(baseUrl + "Products/delete/" + id,{
+            $.ajax(baseUrl + "Orders/delete/" + id,{
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(varJWT)
                 },
                 success: (res) => {
-                    if(res.status == true)
+                    if(res.message == true)
                     {
                         Toastify({
                             text: "Xóa hàng thành công !",
