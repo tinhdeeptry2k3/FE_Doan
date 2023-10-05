@@ -28,9 +28,9 @@
         </div>
 
         <div class="panel">
-            <h3>TÀI KHOẢN</h3>
+            <h3>SẢN PHẨM</h3>
             <div class="btnAdd">
-                <button onclick="openPopup()">THÊM TÀI KHOẢN</button>
+                <button onclick="openPopup()">THÊM SẢN PHẨM</button>
             </div>
 
             <div class="cart" style="margin-top: 30px;margin-bottom: 30px;">
@@ -39,12 +39,12 @@
                         <tr>
                             <td>STT</td>
                             <td>ID</td>
-                            <td>USERNAME</td>
-                            <td>PASSWORD</td>
-                            <td>LEVEL</td>
-                            <td>FULLNAME</td>
-                            <td>ADDRESS</td>
-                            <td>PHONE</td>
+                            <td>NAME</td>
+                            <td>PRICE</td>
+                            <td>QUANTITY</td>
+                            <td>DESCRIPTION</td>
+                            <td>CATEGORYS_ID</td>
+                            <td>IMAGE</td>
                             <td>ACTION</td>
                         </tr>
                     </thead>
@@ -59,28 +59,37 @@
         <div class="form-popup">
             <div class="title-form">
                 <div class="title-popup">
-                    <span>THÊM TÀI KHOẢN</span>
+                    <span>THÊM SẢN PHẨM</span>
                 </div>
                 <div class="exit-popup">
                     <button onclick="closePopup('addPopup')">X</button>
                 </div>
             </div>
             <div class="content-popup">
-                <div class="form" style="margin-top: 30px;">
-                    <input type="text" id="username" placeholder="Username">
-                </div>
-                <div class="form">
-                    <input type="text" id="password" placeholder="Password">
-                </div>
-                <div class="form">
-                    <select id="level">
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <button>THÊM</button>
-                </div>
+                <form action method="POST" id="frmAddProduct">
+                    <input type="hidden" id="id" value="">
+                    <div class="form" style="margin-top: 30px;">
+                        <input type="text" id="nameProduct" placeholder="Tên sản phẩm">
+                    </div>
+                    <div class="form" style="margin-top: 30px;">
+                        <input type="text" id="namePrice" placeholder="Giá tiền">
+                    </div>
+                    <div class="form" style="margin-top: 30px;">
+                        <input type="text" id="nameQuantity" placeholder="Số lượng">
+                    </div>
+                    <div class="form" style="margin-top: 30px;">
+                        <input type="text" id="nameDescription" placeholder="Ghi chú">
+                    </div>
+                    <div class="form" style="margin-top: 30px;">
+                        <input type="text" id="nameCategory" placeholder="Danh mục">
+                    </div>
+                    <div class="form" style="margin-top: 30px;">
+                        <input type="text" id="nameImage" placeholder="Link hình ảnh">
+                    </div>
+                    <div class="form">
+                        <button id="btnAdd">THÊM</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -89,7 +98,7 @@
         <div class="form-popup">
             <div class="title-form">
                 <div class="title-popup">
-                    <span>THÊM TÀI KHOẢN</span>
+                    <span>THÊM SẢN PHẨM</span>
                 </div>
                 <div class="exit-popup">
                     <button onclick="closePopup('editPopup')">X</button>
@@ -98,19 +107,7 @@
             <div class="content-popup">
                 <input type="hidden" id="idRow">
                 <div class="form" style="margin-top: 30px;">
-                    <select id="level" name="level">
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <input type="text" id="fullname" placeholder="fullname">
-                </div>
-                <div class="form">
-                    <input type="text" id="address" placeholder="address">
-                </div>
-                <div class="form">
-                    <input type="text" id="phone" placeholder="phone">
+                    <input type="text" id="editnameCategorys" placeholder="Tên danh mục">
                 </div>
                 <div class="form">
                     <button id="btnEdit">SỬA</button>
@@ -141,26 +138,26 @@
                 }
             });
 
-            $.ajax(baseUrl + "Users/getlist",{
-                method: "POST",
+            $.ajax(baseUrl + "Products/getlist",{
+                method: "GET",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(varJWT)
                 },
                 success: (res) => {
                     var row = document.getElementById('rowData');
                     var count = 0;
-                    var result = res.result;
+                    var result = res;
                     result.forEach(element => {
                         row.innerHTML = row.innerHTML + '<tr>'+
                             '<td>'+ count +'</td>' +
                             '<td>'+ element.id +'</td>' +
-                            '<td>'+ element.username +'</td>' +
-                            '<td>'+ element.password +'</td>' +
-                            '<td>'+ element.level +'</td>' +
-                            '<td>'+ element.fullname +'</td>' +
-                            '<td>'+ element.address +'</td>' +
-                            '<td>'+ element.phone +'</td>' +
-                            '<td><button onclick="editPopup(`editPopup`,`'+ element.username +'`)">Sửa</button><button onclick="deleteRow('+ element.id +')">Xóa</button></td>' +
+                            '<td>'+ element.name +'</td>' +
+                            '<td>'+ element.price +'</td>' +
+                            '<td>'+ element.quantity +'</td>' +
+                            '<td>'+ element.description +'</td>' +
+                            '<td>'+ element.category_id +'</td>' +
+                            '<td><img src="'+ element.image +'"></td>' +
+                            '<td><button onclick="editPopup(`editPopup`,`'+ element.id +'`)">Sửa</button><button onclick="deleteRow('+ element.id +')">Xóa</button></td>' +
                         '</tr>';
                         count++;
                     });
@@ -171,14 +168,11 @@
 
         $("#btnEdit").on('click',() => {
             var data = {
-                "fullname": $("#fullname").val(),
-                "phone": $("#phone").val(),
-                "address": $("#address").val(),
-                "level": $("#level").val(),
-                "username": $("#idRow").val(),
+                "id": $("#idRow").val(),
+                "name": $("#editnameCategorys").val(),
             }
 
-            $.ajax(baseUrl + "Users/update",{
+            $.ajax(baseUrl + "Categorys/update",{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",
@@ -213,6 +207,44 @@
             })
         });
 
+        $("#btnAdd").on('click',(e) => {
+            e.preventDefault();
+            var data = $("#frmAddProduct").serializeArray();
+
+            $.ajax(baseUrl + "Products/insert",{
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT)
+                },
+                data: data,
+                success: (res) => {
+                    if(res.status == true)
+                    {
+                        Toastify({
+                            text: "Thêm hàng thành công !",
+                            duration: 3000
+                        }).showToast();
+                        setTimeout(() => {
+                            location.reload();
+                        },1000);
+                    }
+                    else {
+                        Toastify({
+                            text: "Thêm hàng thất bại !",
+                            duration: 3000
+                        }).showToast();
+                    }
+                },
+                error: (res) => {
+                    Toastify({
+                            text: "Đã xảy ra lỗi !",
+                            duration: 3000
+                    }).showToast();
+                }
+            })
+        })
+
         const openPopup = () => {
             $("#addPopup").attr('style','display: flex');
         }
@@ -227,7 +259,7 @@
         }
 
         const deleteRow = (id) => {
-            $.ajax(baseUrl + "Users/delete/" + id,{
+            $.ajax(baseUrl + "Categorys/delete/" + id,{
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(varJWT)

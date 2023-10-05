@@ -28,9 +28,9 @@
         </div>
 
         <div class="panel">
-            <h3>TÀI KHOẢN</h3>
+            <h3>DANH MỤC</h3>
             <div class="btnAdd">
-                <button onclick="openPopup()">THÊM TÀI KHOẢN</button>
+                <button onclick="openPopup()">THÊM DANH MỤC</button>
             </div>
 
             <div class="cart" style="margin-top: 30px;margin-bottom: 30px;">
@@ -39,12 +39,7 @@
                         <tr>
                             <td>STT</td>
                             <td>ID</td>
-                            <td>USERNAME</td>
-                            <td>PASSWORD</td>
-                            <td>LEVEL</td>
-                            <td>FULLNAME</td>
-                            <td>ADDRESS</td>
-                            <td>PHONE</td>
+                            <td>NAME</td>
                             <td>ACTION</td>
                         </tr>
                     </thead>
@@ -59,7 +54,7 @@
         <div class="form-popup">
             <div class="title-form">
                 <div class="title-popup">
-                    <span>THÊM TÀI KHOẢN</span>
+                    <span>THÊM DANH MỤC</span>
                 </div>
                 <div class="exit-popup">
                     <button onclick="closePopup('addPopup')">X</button>
@@ -67,19 +62,10 @@
             </div>
             <div class="content-popup">
                 <div class="form" style="margin-top: 30px;">
-                    <input type="text" id="username" placeholder="Username">
+                    <input type="text" id="nameCategorys" placeholder="Tên danh mục">
                 </div>
                 <div class="form">
-                    <input type="text" id="password" placeholder="Password">
-                </div>
-                <div class="form">
-                    <select id="level">
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <button>THÊM</button>
+                    <button id="btnAdd">THÊM</button>
                 </div>
             </div>
         </div>
@@ -98,19 +84,7 @@
             <div class="content-popup">
                 <input type="hidden" id="idRow">
                 <div class="form" style="margin-top: 30px;">
-                    <select id="level" name="level">
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <input type="text" id="fullname" placeholder="fullname">
-                </div>
-                <div class="form">
-                    <input type="text" id="address" placeholder="address">
-                </div>
-                <div class="form">
-                    <input type="text" id="phone" placeholder="phone">
+                    <input type="text" id="editnameCategorys" placeholder="Tên danh mục">
                 </div>
                 <div class="form">
                     <button id="btnEdit">SỬA</button>
@@ -141,26 +115,21 @@
                 }
             });
 
-            $.ajax(baseUrl + "Users/getlist",{
-                method: "POST",
+            $.ajax(baseUrl + "Categorys/getlist",{
+                method: "GET",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(varJWT)
                 },
                 success: (res) => {
                     var row = document.getElementById('rowData');
                     var count = 0;
-                    var result = res.result;
+                    var result = res;
                     result.forEach(element => {
                         row.innerHTML = row.innerHTML + '<tr>'+
                             '<td>'+ count +'</td>' +
                             '<td>'+ element.id +'</td>' +
-                            '<td>'+ element.username +'</td>' +
-                            '<td>'+ element.password +'</td>' +
-                            '<td>'+ element.level +'</td>' +
-                            '<td>'+ element.fullname +'</td>' +
-                            '<td>'+ element.address +'</td>' +
-                            '<td>'+ element.phone +'</td>' +
-                            '<td><button onclick="editPopup(`editPopup`,`'+ element.username +'`)">Sửa</button><button onclick="deleteRow('+ element.id +')">Xóa</button></td>' +
+                            '<td>'+ element.name +'</td>' +
+                            '<td><button onclick="editPopup(`editPopup`,`'+ element.id +'`)">Sửa</button><button onclick="deleteRow('+ element.id +')">Xóa</button></td>' +
                         '</tr>';
                         count++;
                     });
@@ -171,14 +140,11 @@
 
         $("#btnEdit").on('click',() => {
             var data = {
-                "fullname": $("#fullname").val(),
-                "phone": $("#phone").val(),
-                "address": $("#address").val(),
-                "level": $("#level").val(),
-                "username": $("#idRow").val(),
+                "id": $("#idRow").val(),
+                "name": $("#editnameCategorys").val(),
             }
 
-            $.ajax(baseUrl + "Users/update",{
+            $.ajax(baseUrl + "Categorys/update",{
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",
@@ -213,6 +179,46 @@
             })
         });
 
+        $("#btnAdd").on('click',() => {
+            var data = {
+                "id": 0,
+                "name": $("#nameCategorys").val()
+            }
+
+            $.ajax(baseUrl + "Categorys/insert",{
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem(varJWT)
+                },
+                data: JSON.stringify(data),
+                success: (res) => {
+                    if(res.status == true)
+                    {
+                        Toastify({
+                            text: "Thêm hàng thành công !",
+                            duration: 3000
+                        }).showToast();
+                        setTimeout(() => {
+                            location.reload();
+                        },1000);
+                    }
+                    else {
+                        Toastify({
+                            text: "Thêm hàng thất bại !",
+                            duration: 3000
+                        }).showToast();
+                    }
+                },
+                error: (res) => {
+                    Toastify({
+                            text: "Đã xảy ra lỗi !",
+                            duration: 3000
+                    }).showToast();
+                }
+            })
+        })
+
         const openPopup = () => {
             $("#addPopup").attr('style','display: flex');
         }
@@ -227,7 +233,7 @@
         }
 
         const deleteRow = (id) => {
-            $.ajax(baseUrl + "Users/delete/" + id,{
+            $.ajax(baseUrl + "Categorys/delete/" + id,{
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(varJWT)

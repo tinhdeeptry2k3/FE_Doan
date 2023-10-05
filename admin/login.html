@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ĐĂNG NHẬP QUẢN TRỊ</title>
     <link rel="stylesheet" href="/public/css/login.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
     <div class="wrapper">
@@ -19,9 +20,51 @@
                 <input type="text" id="password" placeholder="Password"> 
             </div>
             <div class="form">
-                <button type="submit">ĐĂNG NHẬP</button>
+                <button type="submit" onclick="Login()">ĐĂNG NHẬP</button>
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/public/js/ENV.js"></script>
+    <script>
+        const Login = () => {
+            var data = {
+                "username": $("#username").val(),
+                "password": $("#password").val()
+            }
+
+            $.ajax(baseUrl + "Users/login",{
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                data: JSON.stringify(data),
+                success: (res) => {
+                    if(res.status == true)
+                    {
+                        Toastify({
+                            text: "Đăng nhập thành công !",
+                            duration: 3000
+                        }).showToast();
+                        setTimeout(() => {
+                            location.href = "accounts.html";
+                        },1000);
+                        localStorage.setItem(varJWT,res.token);
+                        localStorage.setItem(varUsername,res.username);
+                    }
+                    else
+                    {
+                        Toastify({
+                            text: "Đăng nhập thất bại !",
+                            duration: 3000
+                        }).showToast();
+                    }
+                }
+            })
+        }
+    </script>
 </body>
 </html>
